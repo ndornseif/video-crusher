@@ -1,19 +1,18 @@
 # video-crusher
 
-Low level video manipulation.
+Low level video manipulation.  
 Version: 0.0.7
 
 ## Description
 
 video-crusher is used to convert videos into different forms that enable easier low level access to their bytes and bits.  
-It can reduce all kinds of video parameters for simpler handling.  
 First, the video is deconstructed into images at a specified sample frame rate.  
 These frames are saved in a frame directory and can then be modified in their resolution, color depth etc.  
-video-crusher can then recombine them into a new video.  
-The audio can also be reduced in bandwidth or bit depth.  
+video-crusher is able to recombine them into a new video if desired.  
+Is is also possible to reduce the audio in bandwidth or bit depth.  
 
-## Command line arguments
-```
+## Command Line Arguments
+
 - inputfile (Required, Path)  
 The video file to work on.
 - outputfile (Required, Path)  
@@ -56,16 +55,15 @@ High pass audio at specified frequency.
 Reduce audio bit resolution to specified level.
 - -falsecolor (Optional, Palette)  
 Supply a false color palette file to be applied to the video
-```
-### False color
 
-A false color palette is a text file consisting of 256 24bit color values saved as decimal integers and separated by newlines.  
+### False color palettes
+
+A false color palette is a text file consisting of 256 newline seperated 24-bit color values.  
 Example palettes are supplied in the palettes/ directory.  
 When applying a palette, the image is first converted to grayscale, the grayscale value is then used to look up an RGB color in the palette.  
 
 ## Acknowledgments
-The example palettes were made from mathplotlib colormaps.  
-[matplotlib](https://matplotlib.org/)
+The example palettes were made from [matplotlib](https://matplotlib.org/) colormaps.
 
 ## Dependencies
 
