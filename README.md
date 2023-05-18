@@ -62,6 +62,7 @@ Supply a false color palette file to be applied to the video.
 A false color palette is a text file consisting of 256 newline seperated 24-bit color values.  
 Example palettes are supplied in the palettes/ directory.  
 When applying a palette, the image is first converted to grayscale, the grayscale value is then used to look up an RGB color in the palette.  
+All example palettes use the .vcpal filename extension.  
 
 ## Example outputs
 Input video used for examples: [Noisestorm - Crab Rave (Official Music Video)](https://youtu.be/cE0wfjsybIQ)  
@@ -70,9 +71,9 @@ Input video used for examples: [Noisestorm - Crab Rave (Official Music Video)](h
 ```
 [Output video](https://youtu.be/iQYhlxVNbrg)  
 ```
--fps 10 -crushfactor 4 -audiobits 1  -falsecolor palettes/nipy_spectral.vcpal --upsample -lowpass 1600 -highpass 400  
+-fps 10 -crushfactor 4 -audiobits 1  -falsecolor palettes/nipy_spectral.vcpal --upsample  
 ```
-[Output video](https://youtu.be/4ttgy954dmE)  
+[Output video](https://youtu.be/iZBzmmg-jKQ)  
 
 ## Acknowledgments
 
