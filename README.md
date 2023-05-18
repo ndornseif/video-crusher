@@ -25,7 +25,7 @@ Acceptable values: 2-256
 - -fps (Optional, Int)  
 The framerate to sample the input video at.  
 Defaults to input frame rate.
-- -cpace (Optional, Selection)  
+- -cspace (Optional, Selection)  
 Convert video to this color space. (RGB=24bit color, L=8bit grayscale, 1=1bit grayscale)  
 Defaults to RGB.
 - -crushwidth and -crushheight (Optional, Int)  
@@ -63,7 +63,19 @@ A false color palette is a text file consisting of 256 newline seperated 24-bit 
 Example palettes are supplied in the palettes/ directory.  
 When applying a palette, the image is first converted to grayscale, the grayscale value is then used to look up an RGB color in the palette.  
 
+## Example outputs
+Input video used for examples: [Noisestorm - Crab Rave (Official Music Video)](https://youtu.be/cE0wfjsybIQ)  
+```
+-fps 10 -crushfactor 10 -cspace L -colors 4 --upsample -lowpass 500  
+```
+[Output video](https://youtu.be/iQYhlxVNbrg)  
+```
+-fps 10 -crushfactor 4 -audiobits 1  -falsecolor palettes/nipy_spectral.vcpal --upsample -lowpass 1600 -highpass 400  
+```
+[Output video](https://youtu.be/4ttgy954dmE)  
+
 ## Acknowledgments
+
 The example palettes were made from [matplotlib](https://matplotlib.org/) colormaps.
 
 ## Dependencies
