@@ -1,6 +1,6 @@
 # video-crusher
 
-Very lossy video compression.
+Very lossy video compression.  
 Version: 0.0.7
 
 ## Description
@@ -29,7 +29,7 @@ Defaults to input frame rate.
 Convert video to this color space. (RGB=24bit color, L=8bit grayscale, 1=1bit grayscale)  
 Defaults to RGB.
 - -crushwidth and -crushheight (Optional, Int)  
-Image resolution video will be downsampled to.
+Resolution video will be downsampled to.
 - -crushfactor (Optional, Int)  
 Alternative way of setting -crushwidth and -crushheight.  
 Reduces input video resolution by a set factor.
@@ -44,7 +44,8 @@ Remove the frame directory after video recombination.
 - --novideo (Optional, Flag)  
 Don't recombine video.
 - --noaudio (Optional, Flag)  
-Don't add audio back into output video.
+Don't add audio back into output video.  
+Also set this flag if input video contains no audio.
 - --overwrite (Optional, Flag)  
 Overwrite files that already exist at the specified output location.
 - -lowpass (Optional, Int)  
