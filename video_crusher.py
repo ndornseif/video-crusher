@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 video-crusher
-Utility used to convert videos into different forms that enable easier low level access to their bytes and bits.
+Utility used to make videos worse for artistic or technical reasons.
 
 TODO:
 Replace usage of PIL with CV2

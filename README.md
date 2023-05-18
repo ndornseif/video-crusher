@@ -1,11 +1,11 @@
 # video-crusher
 
-Low level video manipulation.  
+Very lossy video compression.
 Version: 0.0.7
 
 ## Description
 
-video-crusher is used to convert videos into different forms that enable easier low level access to their bytes and bits.  
+video-crusher is used to make videos worse for artistic or technical reasons.  
 First, the video is deconstructed into images at a specified sample frame rate.  
 These frames are saved in a frame directory and can then be modified in their resolution, color depth etc.  
 video-crusher is able to recombine them into a new video if desired.  
@@ -23,7 +23,7 @@ Print full debug information.
 Reduces the amount of color levels per channel to a specified amount.  
 Acceptable values: 2-256  
 - -fps (Optional, Int)  
-The framerate to sample the input video at.
+The framerate to sample the input video at.  
 Defaults to input frame rate.
 - -cpace (Optional, Selection)  
 Convert video to this color space. (RGB=24bit color, L=8bit grayscale, 1=1bit grayscale)  
@@ -54,7 +54,7 @@ High pass audio at specified frequency.
 - -audiobits (Optional, Int)  
 Reduce audio bit resolution to specified level.
 - -falsecolor (Optional, Palette)  
-Supply a false color palette file to be applied to the video
+Supply a false color palette file to be applied to the video.
 
 ### False color palettes
 
