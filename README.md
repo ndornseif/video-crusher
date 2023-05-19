@@ -153,12 +153,12 @@ $ video-crusher in.mp4 out.mp4 -fps 10 -crushfactor 17 -cspace 1 --upsample  --n
 
 Decompressing high resolution or long videos to bitmaps takes a lot of drive space.
 
-| Color | Resolution | Frame rate | Size         |
-|-------|------------|------------|--------------|
-| RGB   | 1920x1080  | 30 fps     | 10.4 GiB/min |
-| RGB   | 1920x1080  | 10 fps     | 3.5 GiB/min  |
-| RGB   | 720x480    | 30 fps     | 1.7 GiB/min  |
-| RGB   | 720x480    | 10 fps     | 580 MiB/min  |
+|    Color    | Resolution | Frame rate | Size         |
+|-------------|------------|------------|--------------|
+| 24-bit RGB  | 1920x1080  | 30 fps     | 10.4 GiB/min |
+| 24-bit RGB  | 1920x1080  | 10 fps     | 3.5 GiB/min  |
+| 24-bit RGB  | 720x480    | 30 fps     | 1.7 GiB/min  |
+| 24-bit RGB  | 720x480    | 10 fps     | 580 MiB/min  |
 
 ## Acknowledgments
 
