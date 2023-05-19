@@ -6,10 +6,10 @@ Version: 0.1.0
 ## Description
 
 video-crusher is used to make videos worse for artistic or technical reasons.  
-First, the video is deconstructed into images at a specified sample frame rate.  
-These frames are saved in a frame directory and can then be modified in their resolution, color depth etc.  
+Videos is deconstructed into frames at a specified sample frame rate.  
+These frames are saved in a frame directory and can then be modified in their resolution, color depth, etc.  
 video-crusher is able to recombine them into a new video if desired.  
-Is is also possible to reduce the audio bandwidth or bit depth.  
+Is is also possible to reduce the audio bandwidth or audio bit depth.  
 
 ## Command Line Arguments
 
@@ -48,8 +48,7 @@ Defaults to RGB.
 
 
 ```
-$ video-crusher -crushwidth INT
-$ video-crusher -crushheight INT
+$ video-crusher -crushwidth INT -crushheight INT
 ```
 Resolution video will be downsampled to.  
 
@@ -64,16 +63,15 @@ Reduces input video resolution by a set factor.
 ```
 $ video-crusher --upsample
 ```
-Returns frames to a higher resolution after downsampling.  
+Returns frames to a higher resolution after downsampling. 
+Defaults to input video resolution.   
 This preserves sharp pixel edges during video compression.  
 
 
 ```
-$ video-crusher -upsamplewidth INT
-$ video-crusher -upsampleheight INT
+$ video-crusher -upsamplewidth INT -upsampleheight INT
 ``` 
-Resolution to upsample frames to.   
-Defaults to input video resolution.  
+Resolution to upsample frames to.     
 
 
 ```
