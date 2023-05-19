@@ -6,7 +6,7 @@ Version: 0.1.0
 ## Description
 
 video-crusher is used to make videos worse for artistic or technical reasons.  
-Videos is deconstructed into frames at a specified sample frame rate.  
+Videos get deconstructed into frames at a specified sample frame rate.  
 These frames are saved in a frame directory and can then be modified in their resolution, color depth, etc.  
 video-crusher is able to recombine them into a new video if desired.  
 Is is also possible to reduce the audio bandwidth or audio bit depth.  
@@ -63,7 +63,7 @@ Reduces input video resolution by a set factor.
 ```
 $ video-crusher --upsample
 ```
-Returns frames to a higher resolution after downsampling. 
+Returns frames to a higher resolution after downsampling.  
 Defaults to input video resolution.   
 This preserves sharp pixel edges during video compression.  
 

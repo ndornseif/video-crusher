@@ -16,10 +16,10 @@ import matplotlib
 def convert_color_format(input_color: tuple[float, float, float, float]) -> int:
     """
     Converts a color form a tuple to integer
-    tuple four floats between 0 and 1 gets converted
+    A tuple of four floats between 0 and 1 gets converted
     to a int between 0x000000 and 0xFFFFFF
     @params
-        input_color - Required  : The color to convert (Tuple(Float, Float, Float))
+        input_color - Required  : The color to convert (Tuple(Float * 4))
     """
     return_color = int(input_color[2] * 255)
     return_color += int(input_color[1] * 255) << 8
@@ -86,6 +86,7 @@ def save_palette_file(file_path: str, palette: list) -> None:
 
 
 if __name__ == "__main__":
+    # Convert all colormaps defined by mathplotlib to palette files
     for colormap in list(matplotlib.colormaps):
         save_palette_file(
             f'palettes/{colormap}.vcpal',
