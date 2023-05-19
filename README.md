@@ -13,81 +13,81 @@ Is is also possible to reduce the audio bandwidth or bit depth.
 
 ## Command Line Arguments
 
-`$ video-crusher INPUTFILE OUTPUTFILE` (Required)  
+```$ video-crusher INPUTFILE OUTPUTFILE```
 The video files to work on.  
 OUTPUTFILE will also be used as the name for the frame directory.  
 
 
-`$ video-crusher --verbose`  
+```$ video-crusher --verbose```  
 Print full debug information.  
 
 
-`$ video-crusher -colors INT`  
+```$ video-crusher -colors INT```
 Reduces the amount of color levels per channel to a specified amount.  
 Acceptable values: 2 - 256  
 
 
-`$ video-crusher -fps INT`  
+```$ video-crusher -fps INT```
 The framerate to sample the input video at.  
 Defaults to input frame rate.  
 
 
-`$ video-crusher -cspace SELECTION`  
+```$ video-crusher -cspace SELECTION```
 Convert video to this color space. (RGB=24-bit color, L=8-bit grayscale, 1=1-bit grayscale)  
 Defaults to RGB.  
 
 
-`$ video-crusher -crushwidth INT`  
-`$ video-crusher -crushheight INT`  
+```$ video-crusher -crushwidth INT```
+```$ video-crusher -crushheight INT```
 Resolution video will be downsampled to.  
 
 
-`$ video-crusher -crushfactor INT`  
+```$ video-crusher -crushfactor INT```  
 Alternative way of setting -crushwidth and -crushheight.  
 Reduces input video resolution by a set factor.  
 
 
-`$ video-crusher --upsample`  
+```$ video-crusher --upsample```
 Returns frames to a higher resolution after downsampling.  
 This preserves sharp pixel edges during video compression.  
 
 
-`$ video-crusher -upsamplewidth INT`  
-`$ video-crusher -upsampleheight INT`  
+```$ video-crusher -upsamplewidth INT```
+```$ video-crusher -upsampleheight INT``` 
 Resolution to upsample frames to.   
 Defaults to input video resolution.  
 
 
-`$ video-crusher --rmframeimg`    
+```$ video-crusher --rmframeimg```
 Remove the frame directory after video recombination.  
 
 
-`$ video-crusher --novideo`  
+```$ video-crusher --novideo```
 Don't recombine video.  
 
 
-`$ video-crusher --noaudio`  
+```$ video-crusher --noaudio```
 Don't add audio back into output video.  
 Please set this flag if input video contains no audio.  
 
 
-`$ video-crusher --overwrite`  
+```$ video-crusher --overwrite```
 Overwrite files that already exist at the specified output location.  
 
 
-`$ video-crusher -lowpass INT`  
+```$ video-crusher -lowpass INT```
 Low pass audio at specified frequency.  
 
 
-`$ video-crusher -highpass INT`  
+```$ video-crusher -highpass INT```
 High pass audio at specified frequency.  
 
 
-`$ video-crusher -audiobits INT`  
+```$ video-crusher -audiobits INT```
 Reduce audio bit resolution to specified level.  
 
 
-`$ video-crusher -falsecolor PALETTE_FILE`    
+```$ video-crusher -falsecolor PALETTE_FILE```
 Supply a false color palette to be applied to the video.  
 
 ### False color palettes
@@ -123,10 +123,10 @@ Decompressing high resolution or long videos to bitmaps takes a lot of drive spa
 
 | Color | Resolution | Frame rate | Size         |
 |-------|------------|------------|--------------|
-| RGB   | 1920x1080  | 30         | 10.4 GiB/min |
-| RGB   | 1920x1080  | 10         | 3.5 GiB/min  |
-| RGB   | 720x480    | 30         | 1.7 GiB/min  |
-| RGB   | 720x480    | 10         | 580 MiB/min  |
+| RGB   | 1920x1080  | 30 fps     | 10.4 GiB/min |
+| RGB   | 1920x1080  | 10 fps     | 3.5 GiB/min  |
+| RGB   | 720x480    | 30 fps     | 1.7 GiB/min  |
+| RGB   | 720x480    | 10 fps     | 580 MiB/min  |
 
 ## Acknowledgments
 
