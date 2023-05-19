@@ -1,7 +1,7 @@
 # video-crusher
 
 Very lossy video compression.  
-Version: 0.0.7
+Version: 0.1.0
 
 ## Description
 
@@ -9,71 +9,89 @@ video-crusher is used to make videos worse for artistic or technical reasons.
 First, the video is deconstructed into images at a specified sample frame rate.  
 These frames are saved in a frame directory and can then be modified in their resolution, color depth etc.  
 video-crusher is able to recombine them into a new video if desired.  
-Is is also possible to reduce the audio in bandwidth or bit depth.  
+Is is also possible to reduce the audio bandwidth or bit depth.  
 
 ## Command Line Arguments
 
-- inputfile (Required, Path)  
-The video file to work on.
-- outputfile (Required, Path)  
-Name of the resulting video file and frame directory.
-- --verbose (Optional, Flag)  
-Print full debug information.
-- -colors (Optional, Int)  
+`$ video-crusher INPUTFILE OUTPUTFILE` (Required)  
+The video files to work on.  
+OUTPUTFILE will also be used as the name for the frame directory.  
+`$ video-crusher --verbose`  
+Print full debug information.  
+`$ video-crusher -colors INT`  
 Reduces the amount of color levels per channel to a specified amount.  
-Acceptable values: 2-256  
-- -fps (Optional, Int)  
+Acceptable values: 2 - 256  
+`$ video-crusher -fps INT`  
 The framerate to sample the input video at.  
-Defaults to input frame rate.
-- -cspace (Optional, Selection)  
-Convert video to this color space. (RGB=24bit color, L=8bit grayscale, 1=1bit grayscale)  
-Defaults to RGB.
-- -crushwidth and -crushheight (Optional, Int)  
-Resolution video will be downsampled to.
-- -crushfactor (Optional, Int)  
+Defaults to input frame rate.  
+`$ video-crusher -cspace SELECTION`  
+Convert video to this color space. (RGB=24-bit color, L=8-bit grayscale, 1=1-bit grayscale)  
+Defaults to RGB.  
+`$ video-crusher -crushwidth INT`  
+`$ video-crusher -crushheight INT`  
+Resolution video will be downsampled to.  
+`$ video-crusher -crushfactor INT`  
 Alternative way of setting -crushwidth and -crushheight.  
-Reduces input video resolution by a set factor.
-- --upsample (Optional, Flag)  
+Reduces input video resolution by a set factor.  
+`$ video-crusher --upsample`  
 Returns frames to a higher resolution after downsampling.  
-This preserves sharp edges during video compression.
-- -upsamplewidth and -upsampleheight (Optional, Int)  
-Resolution to upsample frames to.  
-Defaults to input video resolution.
-- --rmframeimg (Optional, Flag)  
-Remove the frame directory after video recombination.
-- --novideo (Optional, Flag)  
-Don't recombine video.
-- --noaudio (Optional, Flag)  
+This preserves sharp pixel edges during video compression.  
+`$ video-crusher -upsamplewidth INT`  
+`$ video-crusher -upsampleheight INT`  
+Resolution to upsample frames to.   
+Defaults to input video resolution.  
+`$ video-crusher --rmframeimg`    
+Remove the frame directory after video recombination.  
+`$ video-crusher --novideo`  
+Don't recombine video.  
+`$ video-crusher --noaudio`  
 Don't add audio back into output video.  
-Also set this flag if input video contains no audio.
-- --overwrite (Optional, Flag)  
-Overwrite files that already exist at the specified output location.
-- -lowpass (Optional, Int)  
-Low pass audio at specified frequency.
-- -highpass (Optional, Int)  
-High pass audio at specified frequency.
-- -audiobits (Optional, Int)  
-Reduce audio bit resolution to specified level.
-- -falsecolor (Optional, Palette)  
-Supply a false color palette file to be applied to the video.
+Please set this flag if input video contains no audio.  
+`$ video-crusher --overwrite`  
+Overwrite files that already exist at the specified output location.  
+`$ video-crusher -lowpass INT`  
+Low pass audio at specified frequency.  
+`$ video-crusher -highpass INT`  
+High pass audio at specified frequency.  
+`$ video-crusher -audiobits INT`  
+Reduce audio bit resolution to specified level.  
+`$ video-crusher -falsecolor PALETTE_FILE`    
+Supply a false color palette to be applied to the video.  
 
 ### False color palettes
 
 A false color palette is a text file consisting of 256 newline seperated 24-bit color values.  
 Example palettes are supplied in the palettes/ directory.  
+Palettes are encoded as ascii.  
 When applying a palette, the image is first converted to grayscale, the grayscale value is then used to look up an RGB color in the palette.  
 All example palettes use the .vcpal filename extension.  
 
 ## Example outputs
 Input video used for examples: [Noisestorm - Crab Rave (Official Music Video)](https://youtu.be/cE0wfjsybIQ)  
 ```
--fps 10 -crushfactor 10 -cspace L -colors 4 --upsample -lowpass 500  
+$ video-crusher in.mp4 out.mp4 -fps 10 -crushfactor 10 -cspace L -colors 4 --upsample -lowpass 500  
 ```
 [Output video](https://youtu.be/iQYhlxVNbrg)  
 ```
--fps 10 -crushfactor 4 -audiobits 1  -falsecolor palettes/nipy_spectral.vcpal --upsample  
+$ video-crusher in.mp4 out.mp4 -fps 10 -crushfactor 4 -falsecolor palettes/nipy_spectral.vcpal --upsample -audiobits 1  
 ```
 [Output video](https://youtu.be/iZBzmmg-jKQ)  
+```
+$ video-crusher in.mp4 out.mp4 -fps 10 -crushfactor 17 -cspace L -colors 2 --upsample  
+```
+[Output video](https://youtu.be/-ywP-9Joyqs)  
+```
+$ video-crusher in.mp4 out.mp4 -fps 10 -crushfactor 17 -cspace 1 --upsample  --noaudio
+```
+[Output video](https://youtu.be/DpW4GvWdQes)  
+
+## Considerations
+
+Decompressing high resolution or long videos to bitmaps takes a lot of drive space.  
+- RGB 1920x1080 30fps: 10.4 GiB/min   
+- RGB 1920x1080 10fps: 3.5 GiB/min  
+- RGB 720×480 30fps: 1.7 GiB/min  
+- RGB 720×480 10fps: 580 MiB/min  
 
 ## Acknowledgments
 
