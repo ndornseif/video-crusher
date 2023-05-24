@@ -59,10 +59,10 @@ def read_palette_file(file_path: str) -> list:
             line = int(line.strip())
             colors.append(line)
 
-    palette_lenth = len(colors)
-    if palette_lenth != 256:
+    palette_length = len(colors)
+    if palette_length != 256:
         raise ValueError(
-            f'Palette is {palette_lenth} entries long. Exactly 256 required.')
+            f'Palette is {palette_length} entries long. Exactly 256 required.')
 
     return colors
 
@@ -75,10 +75,10 @@ def save_palette_file(file_path: str, palette: list) -> None:
         file_path   - Required  : Path to palette file (Str)
         palette     - Required  : Palette to save (List)
     """
-    palette_lenth = len(palette)
-    if palette_lenth != 256:
+    palette_length = len(palette)
+    if palette_length != 256:
         raise ValueError(
-            f'Palette is {palette_lenth} entries long. Exactly 256 required.')
+            f'Palette is {palette_length} entries long. Exactly 256 required.')
 
     with open(file_path, 'w', encoding='ascii') as file:
         for color in palette:

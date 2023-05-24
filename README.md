@@ -64,7 +64,6 @@ Reduces input video resolution by a set factor.
 $ video-crusher --upsample
 ```
 Returns frames to a higher resolution after downsampling.  
-Defaults to input video resolution.   
 This preserves sharp pixel edges during video compression.  
 
 
@@ -72,6 +71,7 @@ This preserves sharp pixel edges during video compression.
 $ video-crusher -upsamplewidth INT -upsampleheight INT
 ``` 
 Resolution to upsample frames to.     
+Defaults to input video resolution.   
 
 
 ```
