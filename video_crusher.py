@@ -10,7 +10,6 @@ Replace usage of PIL with CV2
 import logging
 import shutil
 import os
-import glob
 import sys
 import argparse
 from argparse import Namespace
