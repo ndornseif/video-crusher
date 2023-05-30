@@ -67,7 +67,6 @@ def reduce_image_color_depth(input_image: PIL.Image, levels:int) -> PIL.Image:
         levels      - Required  : How many different values per color channel to use (Int)
     """
     logger = logging.getLogger(__name__)
-    logger.debug('Reducing image color depth to %s.', levels)
 
     if input_image.mode == Colorspace.SINGLE_BIT.value:
         logger.debug(
@@ -496,28 +495,13 @@ class Crusher():
         else:
             self.logger = logging.getLogger(__name__)
 
-    def save_frame_to_disk(self, frame: PIL.Image, frame_name: str) -> None:
-        """
-        Takes a PIL.Image and saves it as a bitmap (.ppm)
-        The file is saved in the directory defined by Crusher.frame_dir
-        @params
-            self        - Required  : Crusher class instance
-            frame       - Required  : The image to save (PIL.Image)
-        """
-        full_frame_path = os.path.join(
-            self.config.frame_dir,
-            frame_name + '.ppm')
-
-        self.logger.debug('Saving frame as: %s', full_frame_path)
-        frame.save(full_frame_path)
-        frame.close()
-
-    def deconstruct_video_to_disk(self) -> None:
+    def process_video_to_disk(self) -> None:
         """
         Takes the video defined in Crusher.config.input_video_file
         then saves its contents as individual bitmap images
         The images are saved as {n}.ppm in Crusher.config.frame_dir
-        Resolution or colorspace are not altered.
+        Also applies transformations to all frames
+        The Transformations are configured using the Crusher.config variables
         @params
             self        - Required  : Crusher class instance
         """
@@ -545,56 +529,45 @@ class Crusher():
                     self.config.frame_dir,
                     str(save_counter) + '.ppm')
 
-                state = cv2.imwrite(frame_path, frame)
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                PIL_frame = Image.fromarray(frame)
+                PIL_frame = self.process_single_frame(PIL_frame)
+                PIL_frame.save(frame_path)
+
                 save_counter += 1
                 if not state:
                     self.logger.warning('Frame write failed! Frame:%s',
                                         frame_counter)
                     break
 
-    def process_frames_on_disk(self) -> None:
+    def process_single_frame(self, frame: PIL.Image) -> PIL.Image:
         """
-        Applies transformations to all frames in Crusher.config.frame_dir
+        Applies transformations to a frame
         The Transformations are configured using the Crusher.config variables
         @params
             self        - Required  : Crusher class instance
+            frame       - Required  : The image to work on
         """
-        self.logger.debug('Processing video frames from disk at: %s',
-                          self.config.frame_dir)
+        frame = frame.convert(self.config.colorspace.value)
+        if self.config.crush_video:
+            frame = frame.resize(
+                (self.config.crush_width, self.config.crush_height),
+                Image.Resampling.LANCZOS)
 
-        all_frames = glob.glob(f'{self.config.frame_dir}/*.ppm')
-        frame_counter = 0
-        total_frame_count = len(all_frames)
-        for frame_path in all_frames:
-            if self.config.verbose:
-                self.logger.debug(
-                    'Frame %s of %s', frame_counter + 1, total_frame_count)
-            else:
-                print_progress_bar(frame_counter + 1, total_frame_count)
+        if self.config.colorspace.value != Colorspace.SINGLE_BIT.value:
+            frame = reduce_image_color_depth(
+                frame, self.config.color_levels)
 
-            with Image.open(frame_path) as frame:
-                frame = frame.convert(self.config.colorspace.value)
+        if self.config.falsecolor:
+            frame = apply_colors_to_grayscale(
+                frame, self.config.falsecolor_palette)
 
-                if self.config.crush_video:
-                    frame = frame.resize(
-                        (self.config.crush_width, self.config.crush_height),
-                        Image.Resampling.LANCZOS)
+        if self.config.upsample:
+            frame = frame.resize(
+                (self.config.upsample_width, self.config.upsample_height),
+                Image.Resampling.NEAREST)
 
-                if self.config.colorspace.value != Colorspace.SINGLE_BIT.value:
-                    frame = reduce_image_color_depth(
-                        frame, self.config.color_levels)
-
-                if self.config.falsecolor:
-                    frame = apply_colors_to_grayscale(
-                        frame, self.config.falsecolor_palette)
-
-                if self.config.upsample:
-                    frame = frame.resize(
-                        (self.config.upsample_width, self.config.upsample_height),
-                        Image.Resampling.NEAREST)
-
-                frame.save(frame_path)
-                frame_counter += 1
+        return frame
 
     def export_audio_to_disk(self) -> None:
         """
@@ -608,10 +581,15 @@ class Crusher():
         """
         self.logger.debug('Audio processing started.')
         input_file = ffmpeg.input(self.config.input_file_path)
-        audio_stream = input_file.audio.filter_(
-            'highpass', f=self.config.audio_high_pass)
-        audio_stream = audio_stream.filter_(
-            'lowpass', f=self.config.audio_low_pass)
+
+        if self.config.audio_high_pass < 20_000:
+            audio_stream = input_file.audio.filter_(
+                'highpass', f=self.config.audio_high_pass)
+
+        if self.config.audio_low_pass > 1:
+            audio_stream = audio_stream.filter_(
+                'lowpass', f=self.config.audio_low_pass)
+
         if self.config.reduce_audio_bit_depth:
             audio_stream = audio_stream.filter_(
                 'acrusher', bits=self.config.audio_bit_depth)
@@ -678,10 +656,8 @@ class Crusher():
             self.logger.info('Processing audio.')
             self.export_audio_to_disk()
 
-        self.logger.info('Deconstructing video to disk.')
-        self.deconstruct_video_to_disk()
-        self.logger.info('Processing frames from disk.')
-        self.process_frames_on_disk()
+        self.logger.info('Processing frames.')
+        self.process_video_to_disk()
 
         if self.config.combine_frames:
             self.logger.info('Combining frames.')
