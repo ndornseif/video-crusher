@@ -1,7 +1,6 @@
 # video-crusher
 
 Very lossy video compression.  
-Version: 0.1.0
 
 ## Description
 

@@ -27,7 +27,7 @@ from color_palette_tools import read_palette_file
 __author__ = "N. Dornseif"
 __copyright__ = "Copyright 2023, N. Dornseif"
 __license__ = "GNU General Public License v3.0"
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 
 class Colorspace(Enum):
@@ -58,7 +58,7 @@ def print_progress_bar(iteration: int, total: int, length: int = 100, fill: str 
         print()
 
 
-def reduce_image_color_depth(input_image: PIL.Image, levels:int) -> PIL.Image:
+def reduce_image_color_depth(input_image: PIL.Image, levels: int) -> PIL.Image:
     """
     Combines all color values in a channel into (levels) different values
     @params:
