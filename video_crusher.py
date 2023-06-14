@@ -10,7 +10,6 @@ Replace usage of PIL with CV2
 import logging
 import shutil
 import os
-import sys
 import argparse
 from argparse import Namespace
 from enum import Enum
@@ -689,4 +688,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    import sys
     sys.exit(main())

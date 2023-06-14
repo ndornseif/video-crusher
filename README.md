@@ -8,7 +8,7 @@ video-crusher is used to make videos worse for artistic or technical reasons.
 Videos get deconstructed into frames at a specified sample frame rate.  
 These frames are saved in a frame directory and can then be modified in their resolution, color depth, etc.  
 video-crusher is able to recombine them into a new video if desired.  
-Is is also possible to reduce the audio bandwidth or audio bit depth.  
+It is also possible to reduce the audio bandwidth or audio bit depth.  
 
 ## Command Line Arguments
 
@@ -28,21 +28,21 @@ Print full debug information.
 ```
 $ video-crusher -colors INT
 ```
-Reduces the amount of color levels per channel to a specified amount.  
+Reduces the number of color levels per channel to a specified amount.  
 Acceptable values: 2 - 256  
 
 
 ```
 $ video-crusher -fps INT
 ```
-The framerate to sample the input video at.  
-Defaults to input frame rate.  
+The frame rate to sample the input video at.  
+Defaults to the input frame rate.  
 
 
 ```
 $ video-crusher -cspace SELECTION
 ```
-Convert video to this color space. (RGB=24-bit color, L=8-bit grayscale, 1=1-bit grayscale)  
+Convert video to this color space. (RGB = 24-bit color, L = 8-bit grayscale, 1 = 1-bit grayscale)  
 Defaults to RGB.  
 
 
@@ -70,7 +70,7 @@ This preserves sharp pixel edges during video compression.
 $ video-crusher -upsamplewidth INT -upsampleheight INT
 ``` 
 Resolution to upsample frames to.     
-Defaults to input video resolution.   
+Defaults to the input video resolution.   
 
 
 ```
@@ -82,14 +82,14 @@ Remove the frame directory after video recombination.
 ```
 $ video-crusher --novideo
 ```
-Don't recombine video.  
+Don't recombine frames into a video.  
 
 
 ```
 $ video-crusher --noaudio
 ```
-Don't add audio back into output video.  
-Please set this flag if input video contains no audio.  
+Don't add audio back into the output video.  
+Please set this flag if the input video contains no audio.  
 
 
 ```
@@ -101,19 +101,19 @@ Overwrite files that already exist at the specified output location.
 ```
 $ video-crusher -lowpass INT
 ```
-Low pass audio at specified frequency.  
+Low-pass audio at a specified frequency.  
 
 
 ```
 $ video-crusher -highpass INT
 ```
-High pass audio at specified frequency.  
+High-pass audio at a specified frequency.  
 
 
 ```
 $ video-crusher -audiobits INT
 ```
-Reduce audio bit resolution to specified level.  
+Reduce the audio bit resolution to the specified level.  
 
 
 ```
@@ -123,10 +123,10 @@ Supply a false color palette to be applied to the video.
 
 ### False color palettes
 
-A false color palette is a text file consisting of 256 newline seperated 24-bit color values.  
-Example palettes are supplied in the palettes/ directory.  
-Palettes are encoded as ascii.  
-When applying a palette, the image is first converted to grayscale, the grayscale value is then used to look up an RGB color in the palette.  
+A false color palette is a text file consisting of 256 newline separated 24-bit color values.  
+Example palettes are supplied in the "palettes/" directory.  
+Palettes are encoded as ASCII.  
+When applying a palette, the image is first converted to grayscale, and the grayscale value is then used to look up an RGB color in the palette.  
 All example palettes use the .vcpal filename extension.  
 
 ## Example outputs
@@ -161,7 +161,7 @@ Decompressing high resolution or long videos to bitmaps takes a lot of drive spa
 
 ## Acknowledgments
 
-The example palettes were made from [matplotlib](https://matplotlib.org/) colormaps.
+The example palettes were made from [matplotlib](https://matplotlib.org/) color maps.
 
 ## Dependencies
 
@@ -172,3 +172,5 @@ The example palettes were made from [matplotlib](https://matplotlib.org/) colorm
 ## Other
 
 Published under GPL-3.0 license.
+
+
